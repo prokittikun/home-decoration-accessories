@@ -1,9 +1,9 @@
 <?php
 include '../include/header.php';
 require_once '../connectDB/conn.php';
-if (empty($_SESSION['username'])) {
-    header('location: login.php');
-}
+// if (empty($_SESSION['username'])) {
+//     header('location: login.php');
+// }
 
 ?>
 <!DOCTYPE html>

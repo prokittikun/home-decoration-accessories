@@ -2,13 +2,16 @@
 
 session_start();
 require_once '../connectDB/conn.php';
-if (!isset($_SESSION['username'])) {
-    header('location: ../pages/login.php');
+// if (!isset($_SESSION['username'])) {
+//     header('location: ../pages/login.php');
+// }
+if (isset($_SESSION['user_id'])) {
+
+    $id = $_SESSION['user_id'];
+    $sqlPoint = "SELECT point FROM user WHERE id = '" . $id . "'";
+    $queryPoint = mysqli_query($conn, $sqlPoint);
+    $point = mysqli_fetch_assoc($queryPoint);
 }
-$id = $_SESSION['user_id'];
-$sqlPoint = "SELECT point FROM user WHERE id = '" . $id . "'";
-$queryPoint = mysqli_query($conn, $sqlPoint);
-$point = mysqli_fetch_assoc($queryPoint);
 ?>
 
 <!DOCTYPE html>
@@ -39,9 +42,14 @@ $point = mysqli_fetch_assoc($queryPoint);
         <div class="container">
             <a class="navbar-brand" href="#"><b>อุปกรณ์ตกแต่งบ้าน</b></a>
             <div class="ml-auto">
-                <b>
-                    ยอดเงินคงเหลือ : <?= $point['point'] ?> ฿.
-                </b>
+                <?php
+                if (isset($_SESSION['username'])) { ?>
+                    <b>
+                        ยอดเงินคงเหลือ : <?= $point['point']; ?> ฿.
+                    </b>
+                <?php
+                } ?>
+
             </div>
             <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>

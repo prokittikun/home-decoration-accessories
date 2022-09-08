@@ -1,9 +1,9 @@
 <?php
 include '../include/header.php';
 require_once '../connectDB/conn.php';
-if (empty($_SESSION['username'])) {
-    header('location: login.php');
-}
+// if (empty($_SESSION['username'])) {
+//     header('location: login.php');
+// }
 
 ?>
 <!DOCTYPE html>
@@ -51,7 +51,15 @@ if (empty($_SESSION['username'])) {
                                                     <p> <span> <b>ราคา</b> : <?php echo $row['price'] ?> ฿</span></p>
                                                     <input name="amount" type="number" min="0" max="<?= $row['stock'] ?>" value="0" />
                                                     <hr class="mt-5 border-white">
-                                                    <button class="btn btn-outline-primary" name="addcart">เพิ่มลงตะกร้า</button>
+                                                    <?php
+                                                    if (isset($_SESSION['user_id'])) { ?>
+                                                        <button class="btn btn-outline-primary" name="addcart">เพิ่มลงตะกร้า</button>
+                                                    <?php
+                                                    } else { ?>
+                                                        <a href="login.php" class="btn btn-outline-primary btn-sm col-12">เข้าสู่ระบบ</a>
+                                                    <?php
+                                                    }
+                                                    ?>
                                                 </form>
                                             </div>
                                         </div>
